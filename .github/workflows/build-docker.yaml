@@ -7,8 +7,11 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
       - name: build image
-        run: docker build ./api/ -t markfinerty/devops-qr-code-backend:latest
+        run: |
+            docker build ./api/ -t markfinerty/devops-qr-code-backend:latest
+            docker build ./front-end-nextjs/ -t markfinerty/devops-qr-code-frontend:latest
       - name: push image to docker hub
         run: |
-              docker login -u markfinerty -p ${{ secrets.DOCKER_HUB_TOKEN }}
-              docker push markfinerty/devops-qr-code-backend:latest
+            docker login -u markfinerty -p ${{ secrets.DOCKER_HUB_TOKEN }}
+            docker push markfinerty/devops-qr-code-backend:latest
+            docker push markfinerty/devops-qr-code-frontend:latest
