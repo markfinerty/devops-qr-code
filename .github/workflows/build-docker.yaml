@@ -9,4 +9,6 @@ jobs:
       - name: build image
         run: docker build ./api/ -t markfinerty/devops-qr-code-backend:latest
       - name: push image to docker hub
-        run: docker push markfinerty/devops-qr-code-backend:latest
+        run: |
+              docker login -u markfinerty -p ${{ secrets.DOCKER_HUB_TOKEN }}
+              docker push markfinerty/devops-qr-code-backend:latest
